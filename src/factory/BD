@@ -1,0 +1,48 @@
+CREATE DATABASE PROJETO;
+USE PROJETO;
+
+CREATE TABLE pessoa (
+    nomeUser VARCHAR(40),
+    usuario VARCHAR(40),
+    senha VARCHAR(40),
+    PRIMARY KEY (usuario)
+);
+
+INSERT INTO pessoa (nomeUser, usuario, senha) VALUES
+('Julia Santos', 'ju123', '123');
+
+CREATE TABLE local (
+    nomeLocal VARCHAR(40),
+    equipeLocal VARCHAR(40),
+    PRIMARY KEY(nomeLocal)
+);
+
+INSERT INTO local (nomeLocal, equipeLocal) VALUES
+('GOIANIA', 'EQUIPE 1A'),
+('PRATA', 'EQUIPE 2A'),
+('CATALAO', 'EQUIPE 1B');
+
+CREATE TABLE veiculo (
+    placaVeiculo VARCHAR(10),
+    tipoVeiculo VARCHAR(40),
+    PRIMARY KEY(placaVeiculo)
+);
+
+INSERT INTO veiculo (placaVeiculo, tipoVeiculo) VALUES
+('PLACA1', 'CAMINHAO TOCO'),
+('PLACA2', 'CAMINHAO BASCULANTE'),
+('PLACA3', 'PRANCHA');
+
+CREATE TABLE manutencao (
+    idManutencao SERIAL PRIMARY KEY,
+    dataManutencao DATE,
+    horaManutencao TIME,
+    descManutencao VARCHAR(100),
+    status BOOLEAN,
+    usuario VARCHAR(40),
+    nomeLocal VARCHAR(40),
+    placaVeiculo VARCHAR(10),
+    FOREIGN KEY (usuario) REFERENCES pessoa(usuario),
+    FOREIGN KEY (nomeLocal) REFERENCES local(nomeLocal),
+    FOREIGN KEY (placaVeiculo) REFERENCES veiculo(placaVeiculo)
+);
